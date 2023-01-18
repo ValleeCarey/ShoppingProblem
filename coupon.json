@@ -1,0 +1,31 @@
+
+[
+   {
+      "coupon1": {
+         "valid": true,
+         "items": [
+            "item1, item2"
+         ],
+         "discount": 5.0
+      }
+   },
+   {
+      "coupon2": {
+         "valid": true,
+         "items": [
+            "item3"
+         ],
+         "discount": 10.0
+      }
+   },
+   {
+      "coupon3": {
+         "valid": false,
+         "items": [
+            "item4"
+         ],
+         "discount": 15.0
+      }
+   }
+]
+
