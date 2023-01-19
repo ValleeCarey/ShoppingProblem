@@ -48,33 +48,31 @@ def check_taxable(shopping_cart):
 
 #Calculate Feature 4
 def apply_coupon(shopping_cart, coupon_code):
-    shopping_cart = [{'name': 'item1', 'price': 10.00}, {'name': 'item2', 'price': 15.00}, {'name': 'item3', 'price': 20.00}]
-
     data = [{"coupon1": {"valid": True, "items": ["item1, item2"], "discount": 5.00}}, {"coupon2": {"valid": True, "items": ["item3"], "discount": 10.00}},{"coupon3": {"valid": False,  "items": ["item4"], "discount": 15.00}}]
 
-    temp_file = json.dumps(data, indent = 3)
-    with open("coupon.json", "w") as file:
-        file.write(temp_file)
+    #temp_file = json.dumps(data, indent = 3)
+    #with open("coupon.json", "w") as file:
+        #file.write(temp_file)
 
     with open('coupon.json', 'r') as file:
         coupons = json.load(file)
-        for item in coupons:
-            for i in item:
+        for coup in coupons:
+            for i in coup:
         #for coupon_code in coupons:
-                coupon = item[i] #i is coupons1, 2, 3
+                coupon = coup[i] #i is coupons1, 2, 3
                 valid = coupon['valid'] #access valid items and discount
                 if valid:
         #checking to see if any of the coupons applies to the items in the cart.
                     for item in shopping_cart:
                         if item['name'] in coupon['items']:
                             item['price'] -= coupon['discount']
-                            break
-                    else:
-                        print(f"{coupon_code} is not applied to any items in the cart.")
-                else:
-                    print(f"{coupon_code} is not a valid coupon")
+                            print(f"{coupon['discount']} discount has been applied to the total")
+                            return item['price']
 
-coup = apply_coupon(shopping_cart, "coupon3")
+                    else:
+                        print(f"{coupon_code} is not a valid coupon")
+
+coup = apply_coupon(shopping_cart, "coupon1")
 total = calculate_total(shopping_cart)
 print('Subtotal: $' + str(total['subtotal']) + ' USD')
 print('Tax amount: $' + str(total['tax_amount']) +  ' USD')
