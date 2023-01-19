@@ -1,4 +1,1 @@
-{
-    "isTaxable": true
-
-}
+[{"name": "item1", "is_taxable": true}, {"name": "item2", "is_taxable": false}, {"name": "item3", "is_taxable": true}]
