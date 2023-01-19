@@ -8,6 +8,11 @@ def calculate_total(shopping_cart):
     tax_rate = 0.0825
     tax_amount = subtotal * tax_rate
     grand_total = subtotal + tax_amount
+    #Makes sure grand total isn't negative
+    if grand_total < 0:
+        grand_total = 0
+        print(grand_total)
+
     return {'subtotal': subtotal, 'tax_amount': tax_amount, 'grand_total': grand_total}
 
 shopping_cart = [{'name': 'item1', 'price': 10.00}, {'name': 'item2', 'price': 15.00}, {'name': 'item3', 'price': 20.00}]
@@ -66,14 +71,17 @@ def apply_coupon(shopping_cart, coupon_code):
                     for item in shopping_cart:
                         if item['name'] in coupon['items']:
                             item['price'] -= coupon['discount']
-                            print(f"{coupon['discount']} discount has been applied to the total")
-                            return item['price']
+                            if item['price'] >= 0:
+                                print(f"{coupon['discount']} discount has been applied to the total")
+                                return item['price']
 
                     else:
                         print(f"{coupon_code} is not a valid coupon")
 
 coup = apply_coupon(shopping_cart, "coupon1")
+
 total = calculate_total(shopping_cart)
 print('Subtotal: $' + str(total['subtotal']) + ' USD')
 print('Tax amount: $' + str(total['tax_amount']) +  ' USD')
 print('Grand total: $' + str(total['grand_total']) + ' USD')
+
